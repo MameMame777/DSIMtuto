@@ -19,3 +19,13 @@ src/dsim_work/image.so
 src/dsim_work/sir/ir.cache
 src/dsim_work/sir/LMaxi4_reg_mem_tb.sir
 src/dsim_work/sir/LMaxi4_system_tb.sir
+src/axi4_system_waves.vcd
+src/axi4_system_waves.vcd
+src/axi4_reg_mem_waves.mxd
+src/+UVM_TESTNAME=axi4_system_waves.mxd
+src/exec/axi4_reg_mem_waves.mxd
+src/dsim_work/obj/LMaxi4_reg_mem_tb.o
+src/dsim_work/obj/LMaxi4_system_tb.o
+src/dsim_work/sir/ir.cache
+src/dsim_work/sir/LMaxi4_reg_mem_tb.sir
+src/dsim_work/sir/LMaxi4_system_tb.sir
