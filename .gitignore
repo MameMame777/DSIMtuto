@@ -13,3 +13,9 @@ dsim_work/sir/LMtb_top.sir
 dsim_work/sir/LR.sir
 dsim_work/image.so
 sim/waves
+src/dsim_work/obj/LMaxi4_reg_mem_tb.o
+src/dsim_work/obj/LMaxi4_system_tb.o
+src/dsim_work/image.so
+src/dsim_work/sir/ir.cache
+src/dsim_work/sir/LMaxi4_reg_mem_tb.sir
+src/dsim_work/sir/LMaxi4_system_tb.sir

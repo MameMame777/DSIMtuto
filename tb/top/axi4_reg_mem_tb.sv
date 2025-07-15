@@ -63,10 +63,16 @@ module axi4_reg_mem_tb;
         $finish;
     end
 
-    // Waveform dumping
+    // Waveform dumping - DSIM native .mxd format for better performance
     initial begin
-        $dumpfile("axi4_reg_mem_waves.vcd");
+        // DSIM native format dump using -waves command line option
+        // The .mxd file will be generated automatically by DSIM
+        
+        // Generate VCD for compatibility with other tools
+        $dumpfile("exec/axi4_reg_mem_waves.vcd");
         $dumpvars(0, axi4_reg_mem_tb);
+        
+        `uvm_info("TB_TOP", "Waveform dumping enabled: .mxd (via -waves option) and .vcd (compatibility) in exec directory", UVM_LOW)
     end
 
     // Memory content display task for debugging

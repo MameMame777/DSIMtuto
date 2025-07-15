@@ -73,10 +73,13 @@ echo ===========================================================================
 echo Running Test: %TEST_NAME%
 echo Description: %DESCRIPTION%
 echo Filelist: %FILELIST%
-echo Waves File: %WAVES_FILE%
 if not "%UVM_TESTNAME%"=="" (
     echo UVM Test: %UVM_TESTNAME%
+    echo Waves File: %WAVES_FILE%
     echo UVM Verbosity: %UVM_VERBOSITY%
+) else (
+    echo Test Type: Non-UVM
+    echo Waves File: %WAVES_FILE%
 )
 echo ================================================================================
 
@@ -89,7 +92,7 @@ if not exist "%FILELIST%" (
 REM Build DSIM command
 set "DSIM_CMD=dsim"
 
-REM Add UVM support if UVM test
+REM Add UVM support only if UVM test (UVM_TESTNAME is not empty)
 if not "%UVM_TESTNAME%"=="" (
     set "DSIM_CMD=!DSIM_CMD! -uvm 1.2"
 )
@@ -98,9 +101,13 @@ REM Add filelist
 set "DSIM_CMD=!DSIM_CMD! -f %FILELIST%"
 
 REM Add common options
-set "DSIM_CMD=!DSIM_CMD! +acc -waves %WAVES_FILE%"
+if not "%WAVES_FILE%"=="" (
+    set "DSIM_CMD=!DSIM_CMD! +acc -waves %WAVES_FILE%"
+) else (
+    set "DSIM_CMD=!DSIM_CMD! +acc"
+)
 
-REM Add UVM specific options if UVM test
+REM Add UVM specific options only if UVM test
 if not "%UVM_TESTNAME%"=="" (
     set "DSIM_CMD=!DSIM_CMD! +UVM_TESTNAME=%UVM_TESTNAME%"
     if not "%UVM_VERBOSITY%"=="" (

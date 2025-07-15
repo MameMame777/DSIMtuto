@@ -135,10 +135,16 @@ module axi4_system_tb;
         $finish;
     end
 
-    // Waveform dumping
+    // Waveform dumping - DSIM native .mxd format for better performance
     initial begin
-        $dumpfile("axi4_system_waves.vcd");
+        // DSIM native format dump using -waves command line option
+        // The .mxd file will be generated automatically by DSIM
+        
+        // Generate VCD for compatibility with other tools
+        $dumpfile("exec/axi4_system_waves.vcd");
         $dumpvars(0, axi4_system_tb);
+        
+        $display("INFO: Waveform dumping enabled: .mxd (via -waves option) and .vcd (compatibility) in exec directory");
     end
 
 endmodule
