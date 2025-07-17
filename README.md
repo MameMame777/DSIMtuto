@@ -1,21 +1,37 @@
 # DSIMtuto - UVM-AXI4 Verification Project
 
 ## Overview
+
 This project is designed to facilitate the understanding and implementation of the Universal Verification Methodology (UVM) using the DSIM simulator. The focus is on verifying an RTL design that implements a register and memory read/write circuit utilizing the AXI4 interface.
 
 **Key Features:**
+
 - ✅ **Unified Test Execution System**: Configuration-driven test management
 - ✅ **Comprehensive UVM Verification**: Multiple test scenarios with full coverage
 - ✅ **AXI4 Protocol Implementation**: Complete interface and register memory module
 - ✅ **Automated Environment Setup**: DSIM simulator with UVM-1.2 integration
 - ✅ **Scalable Test Framework**: Easy addition of new test configurations
 
+## AXI4 Specification
 
-## Axi4 specification
-https://developer.arm.com/documentation/ihi0022/latest
+<https://developer.arm.com/documentation/ihi0022/latest>
 
-## uvm introduction
-https://www.accellera.org/images/downloads/standards/uvm/uvm_users_guide_1.2.pdf
+## UVM Introduction
+
+<https://www.accellera.org/images/downloads/standards/uvm/uvm_users_guide_1.2.pdf>
+
+## UVM Verification Environment
+
+For detailed information about the UVM verification environment, class structure, and test flows, see:
+📖 **[UVM Verification Environment Guide](docs/uvm_verification_guide.md)**
+
+This guide covers:
+
+- UVM class hierarchy and architecture
+- Test layer implementation details
+- Verification scenarios and test flows
+- Scoreboard implementation
+- Best practices and file organization
 
 ## Project Structure
 The project is organized into several directories, each serving a specific purpose:
