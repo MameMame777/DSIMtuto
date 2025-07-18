@@ -37,12 +37,24 @@ This guide covers:
 The project is organized into several directories, each serving a specific purpose:
 
 - **rtl/**: Contains the RTL design files.
-  - `axi4_if.sv`: Defines the AXI4 interface module.
+  - **interfaces/**: Interface definitions
+    - `axi4_if.sv`: Defines the AXI4 interface module.
+    - `axi4_interface.sv`: Alternative AXI4 interface implementation.
   - `axi4_reg_mem.sv`: Implements the register and memory read/write circuit.
   - `reg_mem_defines.svh`: Contains definitions and constants for the design.
 
-- **tb/**: Contains the testbench files.
+- **verification/**: Contains the verification environment.
+  - **common/**: Common test files and transaction definitions
+    - `axi4_transaction.sv`: Defines the AXI4 transaction class.
+    - `axi4_base_test.sv`: Defines the base test class.
+    - `axi4_reg_mem_basic_test.sv`: Basic register memory test implementation.
+  - **testbench/**: Top-level testbench files
+    - `tb_top.sv`: Instantiates the DUT and UVM components.
+    - `axi4_system_tb.sv`: System-level testbench.
+    - `axi4_reg_mem_tb.sv`: Register memory testbench.
+    - `simple_tb_top.sv`: Simple testbench implementation.
   - **uvm/**: Contains UVM components.
+    - `tb_pkg.sv`: Packages the testbench components.
     - **agents/**: Contains the AXI4 agent components.
       - `axi4_agent.sv`: Defines the AXI4 agent class.
       - `axi4_driver.sv`: Implements the AXI4 driver class.
@@ -62,34 +74,40 @@ The project is organized into several directories, each serving a specific purpo
       - `axi4_base_test.sv`: Defines the base test class.
       - `axi4_smoke_test.sv`: Implements a simple smoke test.
       - `axi4_test_pkg.sv`: Packages the AXI4 test components.
-  - `tb_pkg.sv`: Packages the testbench components.
-  - **top/**: Contains the top-level testbench file.
-    - `tb_top.sv`: Instantiates the DUT and UVM components.
-  - `axi4_transaction.sv`: Defines the AXI4 transaction class.
 
-- **src/**: Contains unified test execution system.
-  - `run.bat`: **Main unified test execution script** - Configuration-driven test management
-  - `test_config.cfg`: **Test configuration file** - Centralized test definitions
-  - `filelists/`: **Source file lists** - Modular file management for each test
-    - `axi4_reg_mem.f`: AXI4 register memory test files
-    - `axi4_system.f`: AXI4 system integration test files  
-    - `uvm_base.f`: UVM base framework test files
-    - `simple.f`: Simple testbench files
-    - `axi4_advanced.f`: Advanced test configuration template
-  - `run.sh`: Legacy script for Linux environments
-  - `Makefile`: Build instructions for compiling the design and testbench
-  - `compile_list.f`: Lists files to be compiled
-  - `README.md`: **Detailed usage instructions** for the test execution system
+- **sim/**: Contains simulation management system.
+  - **run/**: Execution scripts
+    - `run.bat`: **Main unified test execution script** - Configuration-driven test management
+    - `run_axi4_system.bat`: Legacy AXI4 system test script
+    - `run_reg_mem_test.bat`: Legacy register memory test script
+    - `run_uvm.bat`: Legacy UVM test script
+    - `run_simple.bat`: Legacy simple testbench script
+  - **config/**: Configuration files
+    - `test_config.cfg`: **Test configuration file** - Centralized test definitions
+    - **filelists/**: **Source file lists** - Modular file management for each test
+      - `axi4_reg_mem.f`: AXI4 register memory test files
+      - `axi4_system.f`: AXI4 system integration test files  
+      - `uvm_base.f`: UVM base framework test files
+      - `simple.f`: Simple testbench files
+      - `axi4_advanced.f`: Advanced test configuration template
+  - **output/**: Simulation output files
+    - Waveform files (*.vcd, *.mxd)
+    - Log files (*.log)
+    - Compilation results (dsim_work/)
 
-- **sim/**: Contains simulation-related files.
-  - **waves/**: Directory for waveform files generated during simulation.
+- **tools/**: Contains utility scripts and tools.
 
 - **docs/**: Contains documentation files.
   - `axi4_spec.md`: Specifications for the AXI4 protocol.
   - `uvm_guide.md`: Guide to understanding UVM.
+  - `uvm_verification_guide.md`: Comprehensive UVM verification environment guide.
 
 - **diary/**: Contains documentation of insights and findings.
   - `week1.md`: Insights from the verification process during the first week.
+
+- **.github/**: Contains GitHub Actions CI/CD configuration.
+  - **workflows/**: Automated testing workflows
+    - `ci.yml`: Continuous integration pipeline
 
 ## Getting Started
 
@@ -101,16 +119,23 @@ The project is organized into several directories, each serving a specific purpo
 
 ### Quick Start - Unified Test Execution System
 
-Navigate to the `src` directory and use the new unified test execution system:
+Navigate to the `sim/run` directory and use the unified test execution system:
 
 ```bash
-cd src
+cd sim/run
 
 # Show all available test configurations
-run.bat
+.\run.bat
 
 # Execute a specific test
-run.bat [TEST_NAME]
+.\run.bat [TEST_NAME]
+```
+
+**Alternative: Execute from project root**
+
+```bash
+# From project root directory (DSIMtuto/)
+.\run.bat [TEST_NAME]
 ```
 
 ### Available Test Configurations
@@ -126,11 +151,13 @@ run.bat [TEST_NAME]
 ### Execution Examples
 
 #### 1. AXI4 Register Memory Verification (Recommended Starting Point)
+
 ```bash
-run.bat axi4_reg_mem_basic
+.\run.bat axi4_reg_mem_basic
 ```
 
 **Test Coverage:**
+
 - Reset behavior verification
 - Basic write/read operations  
 - Write-read round-trip verification
@@ -138,19 +165,22 @@ run.bat axi4_reg_mem_basic
 - Data pattern testing (5 patterns)
 
 **Expected Results:**
+
 - ✅ 29 UVM_INFO messages
 - ✅ 0 UVM_ERROR messages  
-- ✅ Waveform: `axi4_reg_mem_waves.vcd`
+- ✅ Waveform: `sim/output/axi4_reg_mem_waves.vcd`
 - ✅ All 6 test scenarios PASSED
 
 #### 2. System Integration Testing
+
 ```bash
-run.bat axi4_system
+.\run.bat axi4_system
 ```
 
 #### 3. UVM Framework Testing
+
 ```bash
-run.bat uvm_base
+.\run.bat uvm_base
 ```
 
 ### Understanding Test Results
@@ -176,55 +206,63 @@ UVM_FATAL :    0      ← Must be 0
 ### Adding New Tests
 
 #### Step 1: Create Filelist
-Create `src/filelists/my_new_test.f`:
+
+Create `sim/config/filelists/my_new_test.f`:
+
 ```systemverilog
 # My New Test Filelist
-..\rtl\my_module.sv
-..\tb\my_test.sv
-..\tb\top\my_tb_top.sv
+..\..\rtl\my_module.sv
+..\..\verification\my_test.sv
+..\..\verification\testbench\my_tb_top.sv
 ```
 
 #### Step 2: Add Configuration Entry
-Edit `src/test_config.cfg`:
-```
+
+Edit `sim/config/test_config.cfg`:
+
+```cfg
 my_new_test|My New Test Description|filelists/my_new_test.f|My_Test_Class|my_test_waves.vcd|UVM_MEDIUM
 ```
 
 #### Step 3: Execute New Test
+
 ```bash
-run.bat my_new_test
+.\run.bat my_new_test
 ```
 
 ### Legacy Compatibility
 
 Individual scripts are maintained for backward compatibility:
 
-| Legacy Script | Equivalent Unified Command |
-|---------------|---------------------------|
-| `run_reg_mem_test.bat` | `run.bat axi4_reg_mem_basic` |
-| `run_axi4_system.bat` | `run.bat axi4_system` |
-| `run_uvm.bat` | `run.bat uvm_base` |
-| `run_simple.bat` | `run.bat simple_tb` |
+| Legacy Script | Equivalent Unified Command | Location |
+|---------------|---------------------------|----------|
+| `run_reg_mem_test.bat` | `.\run.bat axi4_reg_mem_basic` | `sim/run/` |
+| `run_axi4_system.bat` | `.\run.bat axi4_system` | `sim/run/` |
+| `run_uvm.bat` | `.\run.bat uvm_base` | `sim/run/` |
+| `run_simple.bat` | `.\run.bat simple_tb` | `sim/run/` |
 
 ### Troubleshooting
 
 #### Common Issues and Solutions
 
 **Error: Configuration file not found**
+
 ```bash
-# Solution: Ensure you're in the src directory
-cd src
-run.bat
+# Solution: Ensure you're in the sim/run directory
+cd sim/run
+.\run.bat
 ```
 
 **Error: Test configuration not found**
+
 ```bash
 # Solution: Check available tests
-run.bat
+.\run.bat
 # Use exact test name from the list
 ```
 
 **Simulation compilation errors**
+
 - Check SystemVerilog syntax in source files
 - Verify file paths in filelists
 - Ensure DSIM license is valid
@@ -232,18 +270,22 @@ run.bat
 ### Advanced Usage
 
 #### For Detailed Debugging
+
 Use UVM_HIGH verbosity tests or modify configuration:
+
 ```bash
-run.bat axi4_advanced  # Uses UVM_HIGH verbosity
+.\run.bat axi4_advanced  # Uses UVM_HIGH verbosity
 ```
 
 #### Waveform Analysis
+
 Generated `.vcd` files can be viewed with:
+
 - GTKWave (Free)
 - ModelSim/QuestaSim
 - Vivado Simulator
 
-For detailed usage instructions, see `src/README.md`.
+For detailed usage instructions, see the main execution script documentation.
 
 ## Conclusion
 
