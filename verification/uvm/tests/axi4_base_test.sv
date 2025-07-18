@@ -1,28 +1,42 @@
-// This file defines the base test class for AXI4 verification.
+// AXI4 Base Test Class
+// File: axi4_base_test.sv
+// Author: SystemVerilog Testbench
+// Date: July 15, 2025
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
 
 class axi4_base_test extends uvm_test;
+    `uvm_component_utils(axi4_base_test)
 
-  `uvm_component_utils(axi4_base_test)
+    // Virtual interface handle
+    virtual axi4_if vif;
 
-  // Declare the environment and other components
-  axi4_env env;
+    function new(string name = "axi4_base_test", uvm_component parent = null);
+        super.new(name, parent);
+    endfunction
 
-  // Constructor
-  function new(string name = "axi4_base_test", uvm_component parent = null);
-    super.new(name, parent);
-  endfunction
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        
+        // Get virtual interface from config database
+        if (!uvm_config_db#(virtual axi4_if)::get(this, "", "vif", vif)) begin
+            `uvm_fatal(get_type_name(), "Virtual interface not found in config database")
+        end
+    endfunction
 
-  // Build phase
-  function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    env = axi4_env::type_id::create("env", this);
-  endfunction
-
-  // Run phase
-  task run_phase(uvm_phase phase);
-    // Start the test execution
-    uvm_report_info("axi4_base_test", "Starting the AXI4 base test...");
-    // Add test logic here
-  endtask
+    virtual task run_phase(uvm_phase phase);
+        phase.raise_objection(this);
+        
+        `uvm_info(get_type_name(), "Starting AXI4 base test", UVM_MEDIUM)
+        
+        // Wait for reset deassertion
+        wait(!vif.reset);
+        repeat(10) @(posedge vif.clk);
+        
+        `uvm_info(get_type_name(), "Test completed successfully", UVM_MEDIUM)
+        
+        phase.drop_objection(this);
+    endtask
 
 endclass

@@ -5,7 +5,7 @@
 ..\..\rtl\interfaces\axi4_interface.sv
 
 # UVM Test Files
-..\..\verification\common\axi4_base_test.sv
+..\..\verification\uvm\tests\axi4_base_test.sv
 
 # UVM Testbench Top
 ..\..\verification\testbench\tb_top.sv
