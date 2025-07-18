@@ -23,3 +23,7 @@ src/dsim_work/src/exec/
 src/dsim.env
 src/metrics.db
 src/dsim.log
+sim/run/dsim_work/
+
+sim/run/dsim.env
+sim/run/dsim.log

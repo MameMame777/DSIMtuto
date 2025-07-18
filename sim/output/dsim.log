@@ -1,0 +1,95 @@
+=N:[UVMSource] Using sources from 'C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2'
+=N:[UsageMeter (2025-07-18 22:16:59 ìåãû (ïWèÄéû))] usage server initial connection
+=N:[License] 
+Licensed for Altair DSim Cloud.
+=N:[License] New lease granted.
+Analyzing...
+Elaborating...
+  Top-level modules:
+    $unit
+    tb_top
+=W:[IneffectiveDynamicCast]:
+    The following dynamic $cast cases will always be false    
+
+    C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_callback.svh:521:9              class uvm_pkg::uvm_callbacks#(class uvm_pkg::uvm_phase,class uvm_pkg::uvm_phase_cb)    class uvm_pkg::uvm_callbacks#(class uvm_pkg::uvm_phase,class uvm_pkg::uvm_callback)    
+    Included from C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_base.svh:76:12                                                                                                                                                                                  
+    Included from C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\uvm_pkg.sv:31:12                                                                                                                                                                                         
+
+    C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_callback.svh:671:12             class uvm_pkg::uvm_phase                                                               class uvm_pkg::uvm_report_object                                                       
+    Included from C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_base.svh:76:12                                                                                                                                                                                  
+
+    C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_callback.svh:731:10             class uvm_pkg::uvm_component                                                           class uvm_pkg::uvm_phase                                                               
+    Included from C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_base.svh:76:12                                                                                                                                                                                  
+
+    C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_callback.svh:808:10             class uvm_pkg::uvm_component                                                           class uvm_pkg::uvm_phase                                                               
+    Included from C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_base.svh:76:12                                                                                                                                                                                  
+
+  Found 5 unique specialization(s) of 5 design element(s).
+Optimizing...
+Building models...
+PLI/VPI access: +rwb 
+Simulation time precision is 1ns.
+  [1/7] module $root: 1730 functions, 3822 basic blocks
+  [2/7] module $pkgs: 1 functions, 2 basic blocks
+  [3/7] CU scope $unit: 9 functions, 50 basic blocks
+  [4/7] module tb_top: 8 functions, 32 basic blocks
+  [5/7] package std: 31 functions, 80 basic blocks
+  [6/7] package uvm_pkg: 6 submodules, 3639 functions, 40719 basic blocks
+  [7/7] interface axi4_if: 1 functions, 2 basic blocks
+Linking image.so...
+Using default typical min/typ/max.
+=S:Begin run-time elaboration and static initialization...
+UVM_INFO C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_root.svh(392) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+=N:[dumpMXD] preparing MXD dump to 'exec/waves.mxd'.
+=N:[dump] Dump started at time 0
+=N:Starting event scheduler...
+UVM_INFO @ 0: reporter [RNTST] Running test Axi4_Base_Test...
+=W:[dump] ..\tb\top\tb_top.sv:60: $dumpfile() called, but dump already enabled.
+=W:[dump] ..\tb\top\tb_top.sv:61: $dumpvars() called after dumping started.
+UVM_INFO ..\tb\top\tb_top.sv(63) @ 0: reporter [TB_TOP] Waveform dumping enabled: .mxd (via -waves option) and .vcd (compatibility) in exec directory
+UVM_INFO ..\tb\tests\axi4_base_test.sv(31) @ 0: uvm_test_top [Axi4_Base_Test] Starting AXI4 base test
+UVM_INFO ..\tb\top\tb_top.sv(32) @ 50: reporter [TB_TOP] Reset released
+UVM_INFO ..\tb\tests\axi4_base_test.sv(37) @ 145: uvm_test_top [Axi4_Base_Test] Test completed successfully
+UVM_INFO C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_objection.svh(1270) @ 145: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_report_server.svh(847) @ 145: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    7
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[Axi4_Base_Test]     2
+[RNTST]     1
+[TB_TOP]     2
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+
+=N:[dumpMXD] closing MXD dump
+=T:Simulation terminated by $finish at time 145 (C:\Users\Nautilus\AppData\Local\metrics-ca\dsim\20240422.0.0\uvm\1.2\src\base\uvm_root.svh:517);
+Run directory: E:\Nautilus\workspace\fpgawork\DSIMtuto\src
+  System timescale is 1ns / 1ns
+  Metrics DSim version: 20240422.0.0 (b:R #c:0 h:d894f4c124 os:msys2_)
+  Random seed: (defaulted to 1)
