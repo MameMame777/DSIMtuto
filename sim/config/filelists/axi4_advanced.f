@@ -12,5 +12,5 @@
 # ..\..\verification\testbench\tb_top.sv
 
 # For now, use basic test as placeholder
-..\..\verification\common\axi4_reg_mem_basic_test.sv
+..\..\verification\scenarios\axi4_reg_mem_basic_test.sv
 ..\..\verification\testbench\tb_top.sv
