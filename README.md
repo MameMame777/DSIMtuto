@@ -92,6 +92,9 @@ The project follows a clean, modular architecture optimized for the unified UVM 
   - `reg_mem_defines.svh`: Design definitions and constants
 
 - **verification/**: Unified UVM verification environment
+  - **scenarios/**: Test scenarios and transaction definitions
+    - `axi4_transaction.sv`: AXI4 transaction class definitions
+    - `axi4_reg_mem_basic_test.sv`: Basic register memory test implementation
   - **testbench/**: **Unified testbench infrastructure**
     - `tb_top.sv`: **Single shared testbench TOP module** (UVM best practice)
   - **uvm/**: UVM component library
