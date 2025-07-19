@@ -7,5 +7,8 @@
 # RTL Design Files
 ..\..\rtl\axi4_reg_mem.sv
 
+# UVM Test Files
+..\..\verification\uvm\tests\axi4_base_test.sv
+
 # System Testbench Files
-..\..\verification\testbench\axi4_system_tb.sv
+..\..\verification\testbench\tb_top.sv

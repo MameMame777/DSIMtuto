@@ -9,8 +9,8 @@
 
 # Advanced Testbench Files (Future implementation)
 # ..\..\verification\tests\axi4_reg_mem_advanced_test.sv
-# ..\..\verification\testbench\axi4_reg_mem_tb.sv
+# ..\..\verification\testbench\tb_top.sv
 
 # For now, use basic test as placeholder
 ..\..\verification\common\axi4_reg_mem_basic_test.sv
-..\..\verification\testbench\axi4_reg_mem_tb.sv
+..\..\verification\testbench\tb_top.sv

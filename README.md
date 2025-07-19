@@ -1,103 +1,146 @@
-# DSIMtuto - UVM-AXI4 Verification Project
+# DSIMtuto - Unified UVM-AXI4 Verification Project
 
 ## Overview
 
-This project is designed to facilitate the understanding and implementation of the Universal Verification Methodology (UVM) using the DSIM simulator. The focus is on verifying an RTL design that implements a register and memory read/write circuit utilizing the AXI4 interface.
+This project demonstrates professional UVM verification methodology using the DSIM simulator with a **unified testbench architecture**. The focus is on verifying an RTL design that implements a register and memory read/write circuit utilizing the AXI4 interface, following UVM best practices with a single shared testbench TOP module.
 
 **Key Features:**
 
-- ✅ **Unified Test Execution System**: Configuration-driven test management
-- ✅ **Comprehensive UVM Verification**: Multiple test scenarios with full coverage
+- ✅ **Unified UVM Testbench**: Single `tb_top.sv` module for all tests (UVM best practice)
+- ✅ **Configuration-Driven Testing**: Centralized test management with multiple scenarios
+- ✅ **Comprehensive Documentation**: Visual architecture diagrams with Mermaid
 - ✅ **AXI4 Protocol Implementation**: Complete interface and register memory module
-- ✅ **Automated Environment Setup**: DSIM simulator with UVM-1.2 integration
-- ✅ **Scalable Test Framework**: Easy addition of new test configurations
+- ✅ **DSIM Integration**: Professional-grade simulator with UVM-1.2 support
+- ✅ **Template Generation System**: Automated project creation tools
 
-## AXI4 Specification
+## Architecture Overview
 
-<https://developer.arm.com/documentation/ihi0022/latest>
+```mermaid
+graph TD
+    A[tb_top.sv<br/>Unified Testbench] --> B[DUT: Axi4_Reg_Mem]
+    A --> C[AXI4 Interface]
+    A --> D[UVM Test Environment]
+    
+    D --> E[axi4_base_test]
+    D --> F[axi4_reg_mem_basic_test]
+    D --> G[System Integration Tests]
+    
+    C --> H[Config Database]
+    H --> I[UVM Components]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style D fill:#e8f5e8
+```
 
-## UVM Introduction
+## Quick Start
 
-<https://www.accellera.org/images/downloads/standards/uvm/uvm_users_guide_1.2.pdf>
+### Running Tests
 
-## UVM Verification Environment
+Execute tests using the unified test runner:
 
-For detailed information about the UVM verification environment, class structure, and test flows, see:
-📖 **[UVM Verification Environment Guide](docs/uvm_verification_guide.md)**
+```bash
+# Navigate to simulation directory
+cd sim/run
 
-This guide covers:
+# Run basic UVM framework test
+.\run.bat uvm_base
 
-- UVM class hierarchy and architecture
-- Test layer implementation details
-- Verification scenarios and test flows
-- Scoreboard implementation
-- Best practices and file organization
+# Run system integration test  
+.\run.bat axi4_system
+
+# Run register memory test
+.\run.bat axi4_reg_mem
+```
+
+### Test Results
+
+Successful test output example:
+```
+================================================================================
+Test 'axi4_system' completed successfully
+Waveform saved to: exec/axi4_system_waves.mxd
+================================================================================
+```
+
+## Documentation
+
+### 📚 Comprehensive Guides
+
+| Document | Description |
+|----------|-------------|
+| **[UVM Verification Environment](docs/uvm_verification_environment.md)** | Complete architecture guide with Mermaid diagrams |
+| **[UVM Guide](docs/uvm_guide.md)** | Updated UVM concepts and best practices |
+| **[AXI4 Specification](docs/axi4_spec.md)** | AXI4 protocol implementation details |
+
+### External References
+
+- **AXI4 Specification**: <https://developer.arm.com/documentation/ihi0022/latest>
+- **UVM User Guide**: <https://www.accellera.org/images/downloads/standards/uvm/uvm_users_guide_1.2.pdf>
 
 ## Project Structure
-The project is organized into several directories, each serving a specific purpose:
 
-- **rtl/**: Contains the RTL design files.
+The project follows a clean, modular architecture optimized for the unified UVM testbench approach:
+
+### Core Directories
+
+- **rtl/**: RTL design files
   - **interfaces/**: Interface definitions
-    - `axi4_if.sv`: Defines the AXI4 interface module.
-    - `axi4_interface.sv`: Alternative AXI4 interface implementation.
-  - `axi4_reg_mem.sv`: Implements the register and memory read/write circuit.
-  - `reg_mem_defines.svh`: Contains definitions and constants for the design.
+    - `axi4_if.sv`: Defines the AXI4 interface module
+    - `axi4_interface.sv`: Alternative AXI4 interface implementation
+  - `axi4_reg_mem.sv`: Register and memory read/write circuit implementation
+  - `reg_mem_defines.svh`: Design definitions and constants
 
-- **verification/**: Contains the verification environment.
-  - **common/**: Common test files and transaction definitions
-    - `axi4_transaction.sv`: Defines the AXI4 transaction class.
-    - `axi4_base_test.sv`: Defines the base test class.
-    - `axi4_reg_mem_basic_test.sv`: Basic register memory test implementation.
-  - **testbench/**: Top-level testbench files
-    - `tb_top.sv`: Instantiates the DUT and UVM components.
-    - `axi4_system_tb.sv`: System-level testbench.
-    - `axi4_reg_mem_tb.sv`: Register memory testbench.
-    - `simple_tb_top.sv`: Simple testbench implementation.
-  - **uvm/**: Contains UVM components.
-    - `tb_pkg.sv`: Packages the testbench components.
-    - **agents/**: Contains the AXI4 agent components.
-      - `axi4_agent.sv`: Defines the AXI4 agent class.
-      - `axi4_driver.sv`: Implements the AXI4 driver class.
-      - `axi4_monitor.sv`: Implements the AXI4 monitor class.
-      - `axi4_sequencer.sv`: Defines the AXI4 sequencer class.
-      - `axi4_agent_pkg.sv`: Packages the AXI4 agent components.
-    - **env/**: Contains the AXI4 environment components.
-      - `axi4_env.sv`: Defines the AXI4 environment class.
-      - `axi4_scoreboard.sv`: Implements the AXI4 scoreboard class.
-      - `axi4_env_pkg.sv`: Packages the AXI4 environment components.
-    - **sequences/**: Contains the AXI4 sequence components.
-      - `axi4_base_seq.sv`: Defines the base sequence class.
-      - `axi4_read_seq.sv`: Implements a read transaction sequence.
-      - `axi4_write_seq.sv`: Implements a write transaction sequence.
-      - `axi4_seq_pkg.sv`: Packages the AXI4 sequence components.
-    - **tests/**: Contains the AXI4 test components.
-      - `axi4_base_test.sv`: Defines the base test class.
-      - `axi4_smoke_test.sv`: Implements a simple smoke test.
-      - `axi4_test_pkg.sv`: Packages the AXI4 test components.
+- **verification/**: Unified UVM verification environment
+  - **testbench/**: **Unified testbench infrastructure**
+    - `tb_top.sv`: **Single shared testbench TOP module** (UVM best practice)
+  - **uvm/**: UVM component library
+    - **tests/**: Test class implementations
+      - `axi4_base_test.sv`: Base test class for all scenarios
+      - `axi4_reg_mem_basic_test.sv`: Register memory test implementation
+    - **agents/**: UVM agent components
+      - `axi4_agent.sv`: AXI4 agent class
+      - `axi4_driver.sv`: AXI4 driver implementation
+      - `axi4_monitor.sv`: AXI4 monitor implementation
+      - `axi4_sequencer.sv`: AXI4 sequencer class
+    - **env/**: Verification environment
+      - `axi4_env.sv`: AXI4 environment class
+      - `axi4_scoreboard.sv`: AXI4 scoreboard implementation
+    - **sequences/**: Transaction sequences
+      - `axi4_base_seq.sv`: Base sequence class
+      - `axi4_read_seq.sv`: Read transaction sequence
+      - `axi4_write_seq.sv`: Write transaction sequence
+  - **interfaces/**: Interface definitions for verification
+    - `axi4_interface.sv`: Verification interface implementation
 
-- **sim/**: Contains simulation management system.
-  - **run/**: Execution scripts
-    - `run.bat`: **Main unified test execution script** - Configuration-driven test management
-    - `run_axi4_system.bat`: Legacy AXI4 system test script
-    - `run_reg_mem_test.bat`: Legacy register memory test script
-    - `run_uvm.bat`: Legacy UVM test script
-    - `run_simple.bat`: Legacy simple testbench script
-  - **config/**: Configuration files
-    - `test_config.cfg`: **Test configuration file** - Centralized test definitions
-    - **filelists/**: **Source file lists** - Modular file management for each test
-      - `axi4_reg_mem.f`: AXI4 register memory test files
-      - `axi4_system.f`: AXI4 system integration test files  
-      - `uvm_base.f`: UVM base framework test files
+- **sim/**: Simulation management system
+  - **run/**: Test execution environment
+    - `run.bat`: **Unified test execution script** with configuration support
+    - Legacy scripts: `run_axi4_system.bat`, `run_reg_mem_test.bat`, etc.
+  - **config/**: Configuration management
+    - `test_config.cfg`: **Centralized test configuration definitions**
+    - **filelists/**: Modular source file management
+      - `axi4_system.f`: System integration test files
+      - `uvm_base.f`: UVM framework test files  
+      - `axi4_reg_mem.f`: Register memory test files
       - `simple.f`: Simple testbench files
-      - `axi4_advanced.f`: Advanced test configuration template
-  - **output/**: Simulation output files
-    - Waveform files (*.vcd, *.mxd)
-    - Log files (*.log)
-    - Compilation results (dsim_work/)
+  - **exec/**: Simulation outputs
+    - Waveform files (`*.vcd`, `*.mxd`)
+    - Execution logs and results
 
-- **tools/**: Contains utility scripts and tools.
+- **tools/**: Project automation utilities
+  - `project_template_generator.py`: Comprehensive project template system
+  - `uvm_component_generator.py`: UVM component generation tool
+  - `create_project_template.bat`: Windows batch template creator
+  - `template_config.json`: Template configuration system
 
-- **docs/**: Contains documentation files.
+- **docs/**: Comprehensive documentation
+  - `uvm_verification_environment.md`: Complete architecture guide with Mermaid diagrams
+  - `uvm_guide.md`: UVM methodology and best practices
+  - `axi4_spec.md`: AXI4 protocol specifications
+
+- **diary/**: Development journal
+  - Daily development logs with technical insights and progress tracking
   - `axi4_spec.md`: Specifications for the AXI4 protocol.
   - `uvm_guide.md`: Guide to understanding UVM.
   - `uvm_verification_guide.md`: Comprehensive UVM verification environment guide.

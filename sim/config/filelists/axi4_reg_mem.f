@@ -9,4 +9,4 @@
 
 # Testbench Files
 ..\..\verification\common\axi4_reg_mem_basic_test.sv
-..\..\verification\testbench\axi4_reg_mem_tb.sv
+..\..\verification\testbench\tb_top.sv
