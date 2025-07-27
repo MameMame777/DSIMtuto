@@ -1,29 +1,43 @@
-src/dsim_work/
-src/exec/
-src/dsim_work/obj/LMaxi4_system_tb.o
-src/dsim_work/image.so
-src/dsim_work/sir/ir.cache
-src/dsim_work/sir/LMaxi4_reg_mem_tb.sir
-src/dsim_work/sir/LMaxi4_system_tb.sir
-src/axi4_system_waves.vcd
-src/axi4_system_waves.vcd
-src/axi4_reg_mem_waves.mxd
-src/+UVM_TESTNAME=axi4_system_waves.mxd
-src/exec/axi4_reg_mem_waves.mxd
-src/dsim_work/obj/LMaxi4_reg_mem_tb.o
-src/dsim_work/obj/LMaxi4_system_tb.o
-src/dsim_work/sir/ir.cache
-src/dsim_work/sir/LMaxi4_reg_mem_tb.sir
-src/dsim_work/sir/LMaxi4_system_tb.sir
-src/dsim_work/image.so
-src/dsim_work/obj/
-src/dsim_work/sir/
-src/dsim_work/src/dsim_work/
-src/dsim_work/src/exec/
-src/dsim.env
-src/metrics.db
-src/dsim.log
-sim/run/
-sim/run/dsim_work/
-sim/run/metrics.db
+# DSIM Simulation Generated Files
+**/dsim_work/
+**/obj/
+**/sir/
+**/*.so
+**/*.o
+**/*.cache
+**/*.sir
+**/*.def
+**/objfiles
+**/image.paths
+
+# Simulation Logs and Databases
+**/*.log
+**/*.db
+**/dsim.env
+
+# Waveform Files
+**/*.vcd
+**/*.mxd
+**/*.wdb
+**/*.ghw
+
+# Temporary Files
+**/*.tmp
+**/*.bak
+**/*~
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Output Directories
+**/output/
+**/results/
+**/reports/
 
